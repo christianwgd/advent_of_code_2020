@@ -188,18 +188,9 @@ def passport_check():
 
 
 def get_num(str, max):
-    values = (0, max)
-    for val in str:
-        if values[0] == 0:
-            middle = (values[1] + 1) // 2 - 1
-        else:
-            middle = values[1] - ((values[1] - values[0]) // 2) -1
-        if val == 'F' or val == 'L':
-            values = (values[0], middle)
-        else:
-            values = (middle + 1, values[1])
-    return values[0]
-
+    # make binary from string
+    binstr = str.replace('F', '0').replace('L', '0').replace('B', '1').replace('R', '1')
+    return int(binstr, 2)
 
 def find_boardingpass():
     with open('boardingpasses.txt', 'r') as password_file:
