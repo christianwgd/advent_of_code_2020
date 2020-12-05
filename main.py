@@ -187,6 +187,46 @@ def passport_check():
     print('Valid:', valid)
 
 
+def get_num(str, max):
+    values = (0, max)
+    for val in str:
+        if values[0] == 0:
+            middle = (values[1] + 1) // 2 - 1
+        else:
+            middle = values[1] - ((values[1] - values[0]) // 2) -1
+        if val == 'F' or val == 'L':
+            values = (values[0], middle)
+        else:
+            values = (middle + 1, values[1])
+    return values[0]
+
+
+def find_boardingpass():
+    with open('boardingpasses.txt', 'r') as password_file:
+        lines = password_file.readlines()
+    max = 0
+    seats = []
+    for line in lines:
+        seat = get_num(line[:7], 127)
+        col = get_num(line[7:], 7)
+        id = seat * 8 + col
+        if id > max:
+            max = id
+        #print(seat, col, id, max)
+        seats.append(id)
+    #print('max:', max)
+    seats = sorted(seats)
+
+    check = 80
+    for seat in seats:
+        print(seat, check)
+        if seat != check:
+            break
+        check += 1
+    print(check)
+
+
+
 
 
 # Press the green button in the gutter to run the script.
@@ -194,6 +234,7 @@ if __name__ == '__main__':
     # find2020()
     # check_passwords()
     # navmap()
-    passport_check()
+    # passport_check()
+    find_boardingpass()
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
