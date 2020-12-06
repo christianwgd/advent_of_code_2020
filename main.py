@@ -1,8 +1,8 @@
-from day6 import day6
+from day7 import solution
 
 if __name__ == '__main__':
-    solution = day6.solve_part1()
-    print('Answer Part1:', solution)
+    answer = solution.part1()
+    print('Answer Part1:', answer)
 
-    solution = day6.solve_part2()
-    print('Answer Part2:', solution)
+    answer = solution.part2()
+    print('Answer Part2:', answer)

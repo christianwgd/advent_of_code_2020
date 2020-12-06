@@ -1,4 +1,4 @@
-def solve_part2():
+def part2():
     with open('day6/answers.txt', 'r') as password_file:
         lines = password_file.readlines()
 
@@ -17,7 +17,7 @@ def solve_part2():
     return sum
 
 
-def solve_part1():
+def part1():
     with open('day6/answers.txt', 'r') as password_file:
         lines = password_file.readlines()
 

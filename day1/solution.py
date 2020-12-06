@@ -1,5 +1,4 @@
-def find2020():
-    # day 1
+def part2():
     with open('day1/numbers.txt', 'r') as numfile:
         numbers = numfile.readlines()
     numbers = [int(x.strip()) for x in numbers]

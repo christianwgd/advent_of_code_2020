@@ -23,10 +23,7 @@ def nav(lines, right, down):
     return count
 
 
-def navmap():
-    # day 3
-    steps = [(1,1), (3,1), (5,1), (7,1), (1,2)]
-
+def part1():
     # with open('day3/map.txt', 'r') as password_file:
     with open('day3/testmap.txt', 'r') as password_file:
         lines = password_file.readlines()
@@ -34,10 +31,16 @@ def navmap():
         count = nav(lines, 3, 1)
         print(count)
 
-        # part 2
-        # product = 1
-        # for step in steps:
-        #     count = nav(lines, step[0], step[1])
-        #     print('Count:', count)
-        #     product = product * count
-        # print('Product:', product)
+
+def part2():
+    steps = [(1,1), (3,1), (5,1), (7,1), (1,2)]
+
+    # with open('day3/map.txt', 'r') as password_file:
+    with open('day3/testmap.txt', 'r') as password_file:
+        lines = password_file.readlines()
+        product = 1
+        for step in steps:
+            count = nav(lines, step[0], step[1])
+            print('Count:', count)
+            product = product * count
+        print('Product:', product)
