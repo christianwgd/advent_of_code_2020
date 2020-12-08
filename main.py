@@ -1,4 +1,4 @@
-from day8 import solution
+from day7 import solution
 
 if __name__ == '__main__':
     # answer = solution.part1()

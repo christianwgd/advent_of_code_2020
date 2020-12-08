@@ -60,18 +60,14 @@ def part1():
 
 
 def count_bags(bag, bags, count):
-    print('check', bag)
     for rule in bags[bag]:
-        print('rule', rule)
         if rule['max'] > 0:
+            print(bag, 'bag contains', rule['max'], rule['color'], 'bags',)
             inner_bag = rule['color']
-            inner_count = count_bags(inner_bag, bags, count)
-            print('inner count', count)
-            prd = rule['max'] * inner_count
-            print('prd', prd)
-            count += prd
-        else:
-            count += 1
+            result = count_bags(inner_bag, bags, count)
+            count += rule['max'] * result + rule['max']
+            print(result)
+            print(count)
     return count
 
 
@@ -93,8 +89,6 @@ def part2():
             else:
                 rules.append({'max': int(rl[0]), 'color': rl[1] + ' ' + rl[2]})
         bags[container] = rules
-
-    print(bags)
 
     find = 'shiny gold'
     count = count_bags(find, bags, count=0)
