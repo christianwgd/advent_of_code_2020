@@ -1,8 +1,9 @@
-def execute(program, substitute):
+def execute(program):
     pos = 0
     acc = 0
     loop = False
-    while True:
+    length = len(program)
+    while pos < length:
         if program[pos]['exec']:
             loop = True
             break
@@ -32,23 +33,37 @@ def part1():
             'instr': instruction[0],
             'op': int(instruction[1]),
             'exec': False,
-            'changed': False
         })
 
     return execute(program)
 
 
-def change_next_instr(program, frm, to):
-    print('change')
+def replace_instruction(program, replace, new, pos):
+    count = 0
+    step_count = 0
     for step in program:
-        if step['instr'] == frm and not step['changed']:
-            step['instr'] = to
-            step['changed'] = True
-    return False
+        if step['instr'] == replace:
+            count += 1
+            print(count, pos)
+            if count == pos:
+                step['instr'] = new
+                # print('changed', pos, replace, 'from', 'to', new)
+                return False
+        step_count += 1
+        if step_count >= len(program):
+            return True
 
+
+def get_copy(program):
+    import copy
+    prog_copy = []
+    for li in program:
+        d2 = copy.deepcopy(li)
+        prog_copy.append(d2)
+    return prog_copy
 
 def part2():
-    with open('day8/test-input.txt', 'r') as password_file:
+    with open('day8/input.txt', 'r') as password_file:
         lines = password_file.readlines()
 
     program = []
@@ -58,15 +73,21 @@ def part2():
             'instr': instruction[0],
             'op': int(instruction[1]),
             'exec': False,
-            'changed': False
         })
 
     loop = True
-    change = True
-    while loop and change:
-        change = change_next_instr(program, 'nop', 'jmp')
-        print(program)
-        acc, loop = execute(program)
-        print('loop', loop, 'change', change)
+    pos = 0
+    stop = False
+    while not stop and loop:
+        pos += 1
+        print('prog', program)
+        print('------->', pos)
+        prog_copy = get_copy(program)
+        stop = replace_instruction(prog_copy, 'jmp', 'nop', pos)
+        # print(count)
+        acc, loop = execute(prog_copy)
+        print('copy', prog_copy)
+        print('loop', loop, pos)
+        print('\n\n')
 
     return acc
