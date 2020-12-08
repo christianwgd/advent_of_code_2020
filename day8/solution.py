@@ -62,6 +62,7 @@ def get_copy(program):
         prog_copy.append(d2)
     return prog_copy
 
+
 def part2():
     with open('day8/input.txt', 'r') as password_file:
         lines = password_file.readlines()
