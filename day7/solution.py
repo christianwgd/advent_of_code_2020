@@ -68,7 +68,10 @@ def count_bags(bag, bags, count):
             count += rule['max'] * result + rule['max']
             print(result)
             print(count)
-    return count
+            return count
+        else:
+            return 1
+
 
 
 def part2():
