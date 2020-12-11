@@ -29,8 +29,6 @@ def check_rule1(map, row, seat):
     else:
         pass
 
-
-
     if seat > 0 and row[seat-1] == 'L' and row[seat+1] == 'L':
         return True
     else:
@@ -38,6 +36,7 @@ def check_rule1(map, row, seat):
 
 
 def check_rule2(row, x, occ):
+    # TODO: Wie in check_rule1 auch diagonal, hinten und vorne prüfen!
     for dist in range(occ):
         print('dist:', dist)
         if row[x+occ] == 'L' or row[x+occ] == '.':
