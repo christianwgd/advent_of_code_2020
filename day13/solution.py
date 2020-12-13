@@ -56,9 +56,8 @@ def part2():
                 if not bus[1] in departs:
                     time = time * bus[1]
                     departs.append(bus[1])
-                cont = False
+                end = True
             else:
-                cont = True
+                end = False
                 break
-        end = not cont
     return t
