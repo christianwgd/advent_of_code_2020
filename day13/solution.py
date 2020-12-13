@@ -1,5 +1,5 @@
 def get_content():
-    with open('day13/test-input.txt', 'r') as password_file:
+    with open('day13/input.txt', 'r') as password_file:
         lines = password_file.readlines()
     return lines
 
@@ -47,24 +47,20 @@ def part2():
     print(bus_departs)
 
     t = 0
-    time = bus_departs[0][1]
+    time = 1
     departs = []
-    departs.append(bus_departs[0][1])
     end = False
     while not end:
         t += time
         for bus in bus_departs:
-            cont = True
-            print(bus[0], bus[1])
-            # print(t, bus[0], (t + bus[0]) % bus[1])
-            if ((t + bus[0]) % bus[1]) != 0:
-                break
-            else:
+            if ((t + bus[0]) % bus[1]) == 0:
                 if not bus[1] in departs:
                     time = time * bus[1]
                     departs.append(bus[1])
                 cont = False
-        # print(t)
+            else:
+                cont = True
+                break
         if not cont:
             end = True
-    print(t)
+    return t
