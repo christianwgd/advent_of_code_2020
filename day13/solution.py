@@ -44,7 +44,6 @@ def part2():
     for i in range(0, len(busses)):
         if busses[i] != 'x':
             bus_departs.append((i, int(busses[i])))
-    print(bus_departs)
 
     t = 0
     time = 1
@@ -61,6 +60,5 @@ def part2():
             else:
                 cont = True
                 break
-        if not cont:
-            end = True
+        end = not cont
     return t
