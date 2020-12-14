@@ -1,3 +1,4 @@
+import itertools
 import re
 
 
@@ -37,5 +38,55 @@ def part1():
         sum += program[key]
     return sum
 
+
+def bin_decode(str):
+    result_list = []
+    count = str.count('X')
+    repl = list(itertools.product(['0', '1'], repeat=count))
+    for r in repl:
+        res = str
+        for b in r:
+            res = res.replace('X', b, 1)
+        result_list.append(res)
+    return result_list
+
+
+
 def part2():
     content = get_content()
+
+    prog = []
+    for line in content:
+        if line.startswith('mask'):
+            mask = line.rstrip('\n').split('=')[1].strip(' ')
+        else:
+            mem = line.rstrip('\n')
+            mem_parts = mem.split('=')
+            val_str = mem_parts[1].strip(' ')
+            new_str = ''
+            adr = re.search(r'\d+', mem_parts[0]).group()
+            bin_str = str(bin(int(adr)))[2:].zfill(36)
+            for i in range(len(bin_str)):
+                if mask[i] == '0':
+                    new_str += bin_str[i]
+                elif mask[i] == '1':
+                    new_str += '1'
+                else:
+                    new_str += mask[i]
+            prog.append((new_str, val_str))
+
+    print(prog)
+
+    program = {}
+    for bin_str, val_str in prog:
+        print('-->', bin_str, val_str)
+        prog_list = bin_decode(bin_str)
+        for step in prog_list:
+            program[step] = val_str
+
+    print(program)
+
+    sum = 0
+    for key in program:
+        sum += int(program[key])
+    return sum
