@@ -15,10 +15,6 @@ def get_masked_value(mask, val_str):
             new_bin += bin_str[i]
         else:
             new_bin += mask[i] or bin_str[i]
-
-    # print(mask)
-    # print(bin_str)
-    # print(new_bin)
     return int(new_bin, 2)
 
 
@@ -34,8 +30,7 @@ def part1():
             mem_parts = mem.split('=')
             adr = int(re.search(r'\d+', mem_parts[0]).group())
             val_str = mem_parts[1].strip(' ')
-            new = get_masked_value(mask, val_str)
-            program[adr] = new
+            program[adr] = get_masked_value(mask, val_str)
 
     sum = 0
     for key in program:
